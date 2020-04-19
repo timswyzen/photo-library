@@ -1,0 +1,38 @@
+_-_CONTEXT_-_
+Context is where we are storing data on temporary memory.
+To access it, use Context.getInstance().
+This contains a list of User objects, the logged in user, search information, etc.
+If you need to access temporary data in between scenes, add it to the Context class.
+
+-_-SERIALIZATION-_-
+We want to always be saving changes to disk.
+This happens automatically if the user logs out, quits, or hits the X button at the top right.
+However, we should be doing this as changes are made as well, since the application fetches data from disk sometimes.
+To serialize an object, just call the serialize() method.
+Example: album2.serialize();
+To fetch an object from disk, call Obj.deserialize(path)
+For example, Photo blue = Photo.deserialize(System.getProperty("user.dir") + "/data/Photos/blue.jpg");
+It's a static method.
+
+_-_OBJECT ORGANIZATION_-_
+Photos are kind of an atomic object.
+Albums contain an ArrayList of Photos.
+Users contain an ArrayList of Albums.
+This is why Context only has a user list - the rest can be inferred.
+
+-_-SWITCHING SCENES-_-
+I copy/paste the same try/catch statement every time. Just use that. Very easy
+
+_-_ALBUM TABLE_-_
+You're going to want to pretty much copy/paste my album TableView for your search menu.
+The things you need are under "tableview var initialization" for the variables.
+Then you'll need the setCellValueFactory statements, as well as the getItems().addAll() call.
+The only difference you'll have is filtering by the search.
+
+===========TODO===========
+- Implement FXML pages I mentioned
+- Make Albums delete on User deletion - Make sure the Photos don't get deleted
+- Stock photos (stock user with 5 built in photos in an album "stock")
+- Full Tag implementation
+
+Just let me know if you have any other design questions.
